@@ -129,15 +129,50 @@ class SortingRobot:
         '''
             Second Solution
         '''
-        while(self.can_move_right()):
+        # while(self.can_move_right()):
+        #     self.swap_item()
+        #     self.move_right()
+        #     if self.compare_item() > 0:
+        #         #print(f">>> Swapping List Item {self._list[self._position]} for Held Item: {self._item} >>>")
+        #         self.swap_item()
+        #         self.set_light_off()
+        #     self.move_left()
+        #     self.swap_item()
+        #     self.move_right()
+
+        # if self.light_is_on():
+        #     print(f"Finished In Time: {self._time}")
+        #     return
+
+        # while(self.can_move_left()):
+        #     self.swap_item()
+        #     self.move_left()
+        #     if self.compare_item() < 0:
+        #         #print(f"<<< Swapping List Item {self._list[self._position]} for Held Item: {self._item} <<<")
+        #         self.swap_item()
+        #         self.set_light_off()
+        #     self.move_right()
+        #     self.swap_item()
+        #     self.move_left()
+            
+        # self.set_light_on()
+        # self.sort()
+
+        '''
+            Third Solution
+        '''
+        if not self.light_is_on():
             self.swap_item()
-            self.move_right()
-            if self.compare_item() > 0:
-                #print(f">>> Swapping List Item {self._list[self._position]} for Held Item: {self._item} >>>")
+            self.set_light_on()
+
+        while(self.can_move_right()):
+            if self.compare_item() == -1:
+                print(f">> List: {self._list[self._position]} > Held: {self._item}")
                 self.swap_item()
                 self.set_light_off()
-            self.move_left()
-            self.swap_item()
+            elif not self.can_move_right() and self.compare_item() == None:
+                self.swap_item()
+                self.set_light_off()
             self.move_right()
 
         if self.light_is_on():
@@ -145,16 +180,18 @@ class SortingRobot:
             return
 
         while(self.can_move_left()):
-            self.swap_item()
-            self.move_left()
-            if self.compare_item() < 0:
-                #print(f"<<< Swapping List Item {self._list[self._position]} for Held Item: {self._item} <<<")
+            if self.compare_item() == 1:
+                print(f"<< List: {self._list[self._position]} < Held: {self._item}")
                 self.swap_item()
                 self.set_light_off()
-            self.move_right()
-            self.swap_item()
+            elif not self.can_move_left() and self.compare_item() == None:
+                self.swap_item()
+                self.set_light_off()
             self.move_left()
-            
+
+        print(f"Pos: {self._position}")
+        print(f"Bot Item: {self._item}")
+        print(f"List: {self._list}")
         self.set_light_on()
         self.sort()
             
