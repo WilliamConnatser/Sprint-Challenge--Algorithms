@@ -102,63 +102,65 @@ class SortingRobot:
         If either item is None, return None.
         """
 
-        self.set_light_off()
-        
-        while not self.light_is_on():
-            self.set_light_on()
-            while self.can_move_right():
-                self.swap_item()
-                self.move_right()
-                if self.compare_item() > 0:
-                    self.swap_item()
-                    self.set_light_off()
-                self.move_left()
-                self.swap_item()
-                self.move_right()
-            if self.light_is_on():
-                break
-            self.set_light_on()
-            while self.can_move_left():
-                self.swap_item()
-                self.move_left()
-                if self.compare_item() < 0:
-                    self.swap_item()
-                    self.set_light_off()
-                self.move_right()
-                self.swap_item()
-                self.move_left()
+        # self.set_light_off()
 
-        # if self.compare_item() == None:
-        #     self.swap_item()
+        # while not self.light_is_on():
         #     self.set_light_on()
+        #     while self.can_move_right():
+        #         self.swap_item()
+        #         self.move_right()
+        #         if self.compare_item() > 0:
+        #             self.swap_item()
+        #             self.set_light_off()
+        #         self.move_left()
+        #         self.swap_item()
+        #         self.move_right()
+        #     if self.light_is_on():
+        #         break
+        #     print(self._list)
+        #     self.set_light_on()
+        #     while self.can_move_left():
+        #         self.swap_item()
+        #         self.move_left()
+        #         if self.compare_item() < 0:
+        #             self.swap_item()
+        #             self.set_light_off()
+        #         self.move_right()
+        #         self.swap_item()
+        #         self.move_left()
 
-        # while(self.can_move_right()):
-        #     if self.compare_item() == -1:
-        #         print(f">> List: {self._list[self._position]} > Held: {self._item}")
-        #         self.swap_item()
-        #         self.set_light_on()
-        #     elif not self.can_move_right() and self.compare_item() == None:
-        #         self.swap_item()
-        #         self.set_light_on()
-        #     self.move_right()
+        # print(f"Time = {self._time}")
 
-        # while(self.can_move_left()):
-        #     if self.compare_item() == 1:
-        #         print(f"<< List: {self._list[self._position]} < Held: {self._item}")
-        #         self.swap_item()
-        #         self.set_light_on()
-        #     self.move_left()
+        while(self.can_move_right()):
+            self.swap_item()
+            self.move_right()
+            if self.compare_item() > 0:
+                print(f">>> Swapping List Item {self._list[self._position]} for Held Item: {self._item} >>>")
+                self.swap_item()
+                self.set_light_off()
+            self.move_left()
+            self.swap_item()
+            self.move_right()
+
+        if self.light_is_on():
+            print(f"Finished In Time: {self._time}")
+            return
+
+        while(self.can_move_left()):
+            self.swap_item()
+            self.move_left()
+            if self.compare_item() < 0:
+                print(f"<<< Swapping List Item {self._list[self._position]} for Held Item: {self._item} <<<")
+                self.swap_item()
+                self.set_light_off()
+            self.move_right()
+            self.swap_item()
+            self.move_left()
             
-        # if self.light_is_on():
-        #     print(f"Pos: {self._position}")
-        #     print(f"Bot Item: {self._item}")
-        #     print(f"List: {self._list}")
-        #     self.set_light_off()
-        #     self.sort()
-        # else:
-        #     print(f"Finished In Time: {self._time}")
-        
-        # print(f"<< Swapping List Item {self._list[self._position]} for Held Item: {self._item}")
+        if not self.light_is_on():
+            self.set_light_on()
+            self.sort()
+            
 
 if __name__ == "__main__":
     # Test our your implementation from the command line
