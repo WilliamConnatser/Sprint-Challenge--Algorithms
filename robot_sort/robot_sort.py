@@ -164,9 +164,12 @@ class SortingRobot:
             Third Solution
             Recursive - Fastest Solution
         '''
+        #This is only true on the first pass through
+        #All other passes we make sure the current position is to the right of None at the end of the function
         if self.compare_item() == None:
             self.swap_item()
 
+        #Get the smallest item to the right of None
         #print(f">>> Starting Pos: {self._position} Bot has: {self._item}")
         while(self.can_move_right()):
             self.move_right()
@@ -186,11 +189,14 @@ class SortingRobot:
             print(f"Finished In Time: {self._time}")
             return
 
+        #Go back to None
         #print(f"<<<<<< Pos: {self._position}")
         while(self.compare_item() != None):
             self.move_left();
 
-
+        #Place the smallest item to the right of None where None is
+        #Move None to the right
+        #Then move to the right of None
         #print(f"<< None At: {self._position}")
         self.swap_item()
         self.move_right()
@@ -198,7 +204,6 @@ class SortingRobot:
         self.move_right()
 
         #print(f"List: {self._list}")
-
         self.sort()
             
 
