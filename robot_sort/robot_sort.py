@@ -93,16 +93,10 @@ class SortingRobot:
         return self._light == "ON"
 
     def sort(self):
-        """
-        Sort the robot's list.
-
-        If the held item's value is greater, return 1.
-        If the held item's value is less, return -1.
-        If the held item's value is equal, return 0.
-        If either item is None, return None.
-        """
-
-        # self.set_light_off()
+        '''
+            First Solution
+        '''
+        #self.set_light_off()
 
         # while not self.light_is_on():
         #     self.set_light_on()
@@ -110,6 +104,7 @@ class SortingRobot:
         #         self.swap_item()
         #         self.move_right()
         #         if self.compare_item() > 0:
+        #             #print(f">>> Swapping List Item {self._list[self._position]} for Held Item: {self._item} >>>")
         #             self.swap_item()
         #             self.set_light_off()
         #         self.move_left()
@@ -117,12 +112,12 @@ class SortingRobot:
         #         self.move_right()
         #     if self.light_is_on():
         #         break
-        #     print(self._list)
         #     self.set_light_on()
         #     while self.can_move_left():
         #         self.swap_item()
         #         self.move_left()
         #         if self.compare_item() < 0:
+        #             #print(f"<<< Swapping List Item {self._list[self._position]} for Held Item: {self._item} <<<")
         #             self.swap_item()
         #             self.set_light_off()
         #         self.move_right()
@@ -131,11 +126,14 @@ class SortingRobot:
 
         # print(f"Time = {self._time}")
 
+        '''
+            Second Solution
+        '''
         while(self.can_move_right()):
             self.swap_item()
             self.move_right()
             if self.compare_item() > 0:
-                print(f">>> Swapping List Item {self._list[self._position]} for Held Item: {self._item} >>>")
+                #print(f">>> Swapping List Item {self._list[self._position]} for Held Item: {self._item} >>>")
                 self.swap_item()
                 self.set_light_off()
             self.move_left()
@@ -150,7 +148,7 @@ class SortingRobot:
             self.swap_item()
             self.move_left()
             if self.compare_item() < 0:
-                print(f"<<< Swapping List Item {self._list[self._position]} for Held Item: {self._item} <<<")
+                #print(f"<<< Swapping List Item {self._list[self._position]} for Held Item: {self._item} <<<")
                 self.swap_item()
                 self.set_light_off()
             self.move_right()
