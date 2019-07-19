@@ -93,12 +93,114 @@ class SortingRobot:
         return self._light == "ON"
 
     def sort(self):
-        """
-        Sort the robot's list.
-        """
-        # Fill this out
-        pass
+        '''
+            First Solution
+            Iterative - Tied For Slowest
+        '''
+        #self.set_light_off()
 
+        # while not self.light_is_on():
+        #     self.set_light_on()
+        #     while self.can_move_right():
+        #         self.swap_item()
+        #         self.move_right()
+        #         if self.compare_item() > 0:
+        #             #print(f">>> Swapping List Item {self._list[self._position]} for Held Item: {self._item} >>>")
+        #             self.swap_item()
+        #             self.set_light_off()
+        #         self.move_left()
+        #         self.swap_item()
+        #         self.move_right()
+        #     if self.light_is_on():
+        #         break
+        #     self.set_light_on()
+        #     while self.can_move_left():
+        #         self.swap_item()
+        #         self.move_left()
+        #         if self.compare_item() < 0:
+        #             #print(f"<<< Swapping List Item {self._list[self._position]} for Held Item: {self._item} <<<")
+        #             self.swap_item()
+        #             self.set_light_off()
+        #         self.move_right()
+        #         self.swap_item()
+        #         self.move_left()
+
+        # print(f"Time = {self._time}")
+
+        '''
+            Second Solution
+            Recursive - Tied For Slowest
+        '''
+        # while(self.can_move_right()):
+        #     self.swap_item()
+        #     self.move_right()
+        #     if self.compare_item() > 0:
+        #         #print(f">>> Swapping List Item {self._list[self._position]} for Held Item: {self._item} >>>")
+        #         self.swap_item()
+        #         self.set_light_off()
+        #     self.move_left()
+        #     self.swap_item()
+        #     self.move_right()
+
+        # if self.light_is_on():
+        #     print(f"Finished In Time: {self._time}")
+        #     return
+
+        # while(self.can_move_left()):
+        #     self.swap_item()
+        #     self.move_left()
+        #     if self.compare_item() < 0:
+        #         #print(f"<<< Swapping List Item {self._list[self._position]} for Held Item: {self._item} <<<")
+        #         self.swap_item()
+        #         self.set_light_off()
+        #     self.move_right()
+        #     self.swap_item()
+        #     self.move_left()
+            
+        # self.set_light_on()
+        # self.sort()
+
+        '''
+            Third Solution
+            Recursive - Fastest Solution
+        '''
+        if self.compare_item() == None:
+            self.swap_item()
+
+        #print(f">>> Starting Pos: {self._position} Bot has: {self._item}")
+        while(self.can_move_right()):
+            self.move_right()
+            if self.compare_item() > 0:
+                self.swap_item()
+
+        #If None is at the end of the list then it's sorted
+        #Test for edge case where last 2 items are sometimes backwards
+        #And return sorted array
+        if self.compare_item() == None:
+            self.swap_item()
+            self.move_left()
+            if self.compare_item() == -1:
+                self.swap_item()
+            self.move_right()
+            self.swap_item()
+            print(f"Finished In Time: {self._time}")
+            return
+
+        #print(f"<<<<<< Pos: {self._position}")
+        while(self.compare_item() != None):
+            self.move_left();
+
+
+        #print(f"<< None At: {self._position}")
+        self.swap_item()
+        self.move_right()
+        self.swap_item()
+        self.move_right()
+
+        #print(f"List: {self._list}")
+
+        self.sort()
+            
 
 if __name__ == "__main__":
     # Test our your implementation from the command line
