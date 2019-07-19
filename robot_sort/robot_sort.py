@@ -95,10 +95,70 @@ class SortingRobot:
     def sort(self):
         """
         Sort the robot's list.
-        """
-        # Fill this out
-        pass
 
+        If the held item's value is greater, return 1.
+        If the held item's value is less, return -1.
+        If the held item's value is equal, return 0.
+        If either item is None, return None.
+        """
+
+        self.set_light_off()
+        
+        while not self.light_is_on():
+            self.set_light_on()
+            while self.can_move_right():
+                self.swap_item()
+                self.move_right()
+                if self.compare_item() > 0:
+                    self.swap_item()
+                    self.set_light_off()
+                self.move_left()
+                self.swap_item()
+                self.move_right()
+            if self.light_is_on():
+                break
+            self.set_light_on()
+            while self.can_move_left():
+                self.swap_item()
+                self.move_left()
+                if self.compare_item() < 0:
+                    self.swap_item()
+                    self.set_light_off()
+                self.move_right()
+                self.swap_item()
+                self.move_left()
+
+        # if self.compare_item() == None:
+        #     self.swap_item()
+        #     self.set_light_on()
+
+        # while(self.can_move_right()):
+        #     if self.compare_item() == -1:
+        #         print(f">> List: {self._list[self._position]} > Held: {self._item}")
+        #         self.swap_item()
+        #         self.set_light_on()
+        #     elif not self.can_move_right() and self.compare_item() == None:
+        #         self.swap_item()
+        #         self.set_light_on()
+        #     self.move_right()
+
+        # while(self.can_move_left()):
+        #     if self.compare_item() == 1:
+        #         print(f"<< List: {self._list[self._position]} < Held: {self._item}")
+        #         self.swap_item()
+        #         self.set_light_on()
+        #     self.move_left()
+            
+        # if self.light_is_on():
+        #     print(f"Pos: {self._position}")
+        #     print(f"Bot Item: {self._item}")
+        #     print(f"List: {self._list}")
+        #     self.set_light_off()
+        #     self.sort()
+        # else:
+        #     print(f"Finished In Time: {self._time}")
+        
+        # print(f"<< Swapping List Item {self._list[self._position]} for Held Item: {self._item}")
 
 if __name__ == "__main__":
     # Test our your implementation from the command line
